@@ -1,0 +1,13 @@
+#weather-icon{
+    height: 80px;
+    width: 80px;
+}
+
+#middle-item-text{
+    font-size: 1.5rem;
+}
+
+.container{
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
