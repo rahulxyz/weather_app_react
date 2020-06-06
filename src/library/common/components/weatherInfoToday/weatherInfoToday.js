@@ -3,13 +3,16 @@ import moment from 'moment';
 
 const WeatherInfoToday = (props) => {
     const { location, current } = props;
-    const date = moment(new Date(location.localtime)).format('ddd, MMMM YYYY');
-    const time = moment(new Date(location.localtime)).format('LT');
+    console.log(">>>>> ", current, location); 
+    const date = moment(new Date(location.dt*1000)).format('ddd, MMMM YYYY');
+    const time = moment(new Date(location.dt*1000)).format('LT');
+    const icon = `http://openweathermap.org/img/wn/${current.icon}@2x.png`
+
     return (
         <div id="weather-info-today" className="">
             <div className="row  d-flex align-items-center justify-content-center" id="top-date">
 
-                <img src={current.condition && current.condition.icon} alt="" />
+                <img src={icon} alt="" />
 
                 <div>
 
@@ -20,15 +23,12 @@ const WeatherInfoToday = (props) => {
             </div>
 
             <div className="row d-flex align-items-center justify-content-center" id="middle-temperature">
-                <p>{current.wind_kph}&#x2191;</p>
-                <p className="display-1">{current.temp_c}&#176;</p>
-                <p>{current.pressure_in}&#x2193;</p>
+                <p>{location.speed}&#x2191;</p>
+                <p className="display-1">{location.temp.day}&#176;</p>
+                <p>{location.pressure}&#x2193;</p>
             </div>
             <div className="row d-flex justify-content-center pr-3" id="bottom-text">
-                {!current.condition ?
-                    <p>..Loading</p>
-                    :
-                    <p>{current.condition.text}</p>}
+                    <p>{location.weather[0].description}</p>
             </div>
             {props.value}
         </div>

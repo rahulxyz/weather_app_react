@@ -23,11 +23,12 @@ export default function Homepage(state = initialState, action) {
                 }
             }
         case WEATHER_BY_COUNTRY_SUCCESS:
+            console.log("---> ", action);
             return {
                 ...state,
-                location: action.payload.location,
-                current: action.payload.current,
-                forecastList: action.payload.forecast.forecastday,
+                location: action.payload.list[0],
+                current: action.payload.list[0].weather[0],
+                forecastList: action.payload.list,
                 error: {
                     hasError: false,
                     errorStatus: 200
